@@ -34,6 +34,12 @@ module.exports = function (grunt) {
           dest: buildDir + '/index.html'
         }]
       },
+      php: {
+        files: [{
+          src: 'app/actions.php',
+          dest: buildDir + '/actions.php'
+        }]
+      },
     css:{
       files: [{
         cwd: 'app/',
@@ -93,6 +99,10 @@ module.exports = function (grunt) {
       index: {
         files: [ srcDir + '/index.html' ],
         tasks: [ 'copy:index' ],
+      },
+      php: {
+        files: [ srcDir + '/actions.php' ],
+        tasks: [ 'copy:php' ],
       },
       js: {
         files: [ srcDir + '/**/*.js', '!' + bowerDir + '/**/*' , 'env.js'],
