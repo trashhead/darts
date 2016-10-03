@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Highscore</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="" style="text-align:center">
+        <span class="numbers">
+            <span id="arrows">{{arrows}}</span> <img src="images/62_-_Darts_sport_game_play-128.png" width="35"></img>
+        </span>
+    </div>
+    <uib-tabset active="active">
+        <uib-tab index="$index" heading="{{range}}" ng-repeat="range in ['Alltime', 'Månad', 'Vecka', 'Idag']" ng-click="clickTab(range)">
+            <table width="100%">
+                <thead>
+                    <th>Plats</th>
+                    <th>Spelare</th>
+                    <th>Poäng</th>
+                    <th>Tid</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="highscore in highscore" ng-class="{bold:highscore.current}">
+                        <td>{{highscore.rank}}</td>
+                        <td>{{highscore.username}}</td>
+                        <td>{{highscore.points}}</td>
+                        <td>{{highscore.timestamp}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-if="!highscore" style="text-align: center;padding-top: 20px;">
+                <img ng-src="images/ajax-loader.gif">
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger pull-left" ng-if="id" type="button" ng-click="remove()">Spara ej resultat</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+</div>

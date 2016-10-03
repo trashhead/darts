@@ -1,0 +1,148 @@
+
+html, body{
+    width:100%;
+    height:100%;
+}
+
+.wrap {
+    width:80%;
+    margin:0 auto;
+    text-align: center;
+}
+.wrap div.selected{
+    background-color:goldenrod;
+}
+.square {
+    /*float:left;*/
+    position: relative;
+    width: 18%;
+    padding-bottom : 18%; /* = width for a 1:1 aspect ratio */
+    margin:1%;
+    background:gold;
+    overflow:hidden;
+    display:inline-block;
+    cursor:pointer;
+}
+.square.zero{
+    width:98%;
+}
+.content {
+    position:absolute;
+    height:100%; /* = 100% - 2*5% padding */
+    width:100%; /* = 100% - 2*5% padding */
+    /*padding: 5%;*/
+    
+}
+.mytable{
+    display:table;
+    width:100%;
+    height:100%;
+}
+.table-cell{
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+}
+.numbers{
+    font-weight:900;
+    font-size:7vw;
+    display: inline-block;
+}
+.points{
+    position:relative;
+}
+
+.wrap:after {
+    clear: both;
+    display: table;
+    content: "";
+}
+.landscape-message{
+    display:none;
+}
+
+.number-holder{
+    margin: 0 auto;
+    text-align: center;
+    cursor:pointer;
+}
+
+.header-score-img{
+    width:28px;
+    height:28px;
+    vertical-align:initial;
+}
+.username{
+    text-align: center;
+   
+    margin: 0 auto;
+  
+    line-height: 27px;
+}
+.brand{
+    font-weight:bold;
+    font-size:20px;
+    color:#868686;
+    cursor:pointer;
+}
+.header{
+    padding-top:8px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
+    padding:5px;
+    height:40px;
+}
+.glyphicon-user{
+    font-size: 28px;
+    cursor:pointer;
+}
+.header a{
+    display: inline-block;
+}
+.header-buttons{
+    position:relative;
+    z-index:1;
+}
+.bold{
+    font-weight:bold;
+}
+
+@media screen and (min-width: 360px) {
+    .square {
+        width:23%;
+        padding-bottom : 23%; 
+    }
+}
+@media screen and (min-width: 550px) {
+    .square {
+        width:18%;
+        padding-bottom : 18%; 
+    }
+}
+@media screen and (min-width: 800px) {
+    .square {
+        width:14%;
+        padding-bottom : 14%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .square {
+        width:12%;
+        padding-bottom : 12%;
+    }
+}
+@media screen and (orientation:landscape){
+    .my-app{
+        display:none;
+    }
+    .landscape-message{
+        display:table;
+        width:100%;
+        height:100%;
+    }
+    .cell{
+        text-align:center;
+        display:table-cell;
+        vertical-align:middle;
+    }
+}

@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Hur många pilar tog sista omgången ?</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="number-holder">
+        <div class="numbers" style="margin-right: 20%;" ng-click="pressNumber(3)">
+            3
+        </div>
+        <div class="numbers" ng-if="oldN <= 19" style="margin-right: 20%;" ng-click="pressNumber(2)">
+            2
+        </div>
+        <div class="numbers" ng-if="oldN == 19" ng-click="pressNumber(1)">
+            1
+        </div>
+    </div>
+    <!--<div style="position: relative;" ng-if="oldN == 19">
+        <img src="images/62_-_Darts_sport_game_play-128.png" width="35" style="
+        -ms-transform: rotate(7deg); /* IE 9 */
+        -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+        transform: rotate(-70deg);
+        position: absolute;">
+    
+        <img src="images/62_-_Darts_sport_game_play-128.png" width="35" style="
+        -ms-transform: rotate(7deg); /* IE 9 */
+        -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+        transform: rotate(-45deg);
+        position: absolute;
+        left: 13px;">
+        <img src="images/62_-_Darts_sport_game_play-128.png" width="35" style="
+        -ms-transform: rotate(7deg); /* IE 9 */
+        -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+        transform: rotate(-18deg);
+        position: absolute;
+        left: 27px;">
+    </div>
+    <div style="position: relative;" ng-if="oldN == 18">
+        <img src="images/62_-_Darts_sport_game_play-128.png" width="35" style="
+        -ms-transform: rotate(7deg); /* IE 9 */
+        -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+        transform: rotate(-70deg);
+        position: absolute;">
+        <img src="images/62_-_Darts_sport_game_play-128.png" width="35" style="
+        -ms-transform: rotate(7deg); /* IE 9 */
+        -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+        transform: rotate(-18deg);
+        position: absolute;
+        left: 27px;">
+    </div>
+    <div style="position: relative;">
+        <img src="images/62_-_Darts_sport_game_play-128.png" width="35" style="
+        -ms-transform: rotate(7deg); /* IE 9 */
+        -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+        transform: rotate(-45deg);
+        position: absolute;
+        left: 13px;">
+    </div>-->
+    <!--<div>
+        Selected: <b>{{ $ctrl.selected.item }}</b> {{oldN}}
+    </div>-->
+</div>
+<div class="modal-footer">
+    <!--<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>-->
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
