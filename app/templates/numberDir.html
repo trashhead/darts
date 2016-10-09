@@ -1,5 +1,5 @@
 
-<div class="square" ng-click="select(n)" ng-class="{selected:selected&&n!=0, zero:n=='0'}">
+<div class="square" ng-click="select(n)" ng-class="{selected:n <= $root.oldN&&n>0, zero:n=='0'||n=='-1'}">
     <!--<div ng-click="select(n)" ng-class="{selected:selected}">
     <span>{{n}}</span>
 </div>-->
@@ -7,8 +7,11 @@
     <div class="content">
         <div class="mytable">
             <div class="table-cell ">
-                    <span ng-if="n!=0" class="points numbers" id="points-{{n}}">{{n}}</span>
+                    <span ng-if="n>0" class="points numbers" id="points-{{n}}">{{n}}</span>
                     <span ng-if="n==0" class="points numbers" id="points-{{n}}">Missade</span>
+                    <span ng-if="n<0" class="points numbers" id="points-{{n}}">
+                        <span class="glyphicon glyphicon-repeat flipped" aria-hidden="true"></span>
+                    </span>
             </div>
         </div>
     </div>

@@ -12,6 +12,14 @@ html, body{
 .wrap div.selected{
     background-color:goldenrod;
 }
+.flipped{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
 .square {
     /*float:left;*/
     position: relative;
@@ -24,7 +32,7 @@ html, body{
     cursor:pointer;
 }
 .square.zero{
-    width:98%;
+    width:47%;
 }
 .content {
     position:absolute;

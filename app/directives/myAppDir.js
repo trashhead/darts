@@ -69,6 +69,8 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
     $scope.showHighscore = showHighscore;
     $scope.changeUsername = changeUsername;
     $rootScope.n = 0;
+    $rootScope.oldN = 0;
+    $scope.history = [{n:0, arrows:0}];
     $scope.username = $cookies.get("spelarnamn");
     $scope.arrows = 0;
     $scope.range = function(min, max, step){
@@ -81,65 +83,67 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
     $scope.toggleVisible = function(){
         $scope.visible = !$scope.visible;
     }
+    $scope.$on("undo", function(){
+        if($scope.history.length > 1){
+            $scope.history.pop();
+            var item = $scope.history[$scope.history.length-1];
+            $rootScope.oldN = item.n;
+            $scope.arrows = item.arrows;
+        }
+    })
     $scope.$on("clicked", function(event, n){
-        if(n <= $rootScope.n && n != 0){
+        var position = $("#arrows").position();
+        var original = $("#points-"+n);
+        var cloned = original.clone();
+        if(n == 0){
+            cloned.text("3");
+        }
+        cloned.attr("id", "");
+        cloned.appendTo("body");
+        cloned.css("position", "absolute");
+        cloned.css("top", original.offset().top);
+        cloned.css("left", original.offset().left);
+        cloned.animate({top:position.top, left:position.left}, function(){
             
-        }else if(n-$rootScope.n > 3){
-            alert("Fler än 3");
-            event.preventDefault();
-        }else{
-            var position = $("#arrows").position();
-            var original = $("#points-"+n);
-            var cloned = original.clone();
-            if(n == 0){
-                cloned.text("3");
-            }
-            cloned.attr("id", "");
-            cloned.appendTo("body");
-            cloned.css("position", "absolute");
-            cloned.css("top", original.offset().top);
-            cloned.css("left", original.offset().left);
-            cloned.animate({top:position.top, left:position.left}, function(){
-                
-                cloned.remove();
-                if(n == 20){
-                    if(n-$rootScope.oldN == 3){
-                        saveHighscoreModal();
-                    }else{
-                        var modalInstance = $uibModal.open({
-                            animation: true,
-                            ariaLabelledBy: 'modal-title',
-                            ariaDescribedBy: 'modal-body',
-                            templateUrl: 'templates/modal.html',
-                            scope:$scope,
-                            controller: function($scope){
-                                $scope.pressNumber = function(number){
-                                    //alert(($scope.arrows+number)+" pilar användes");
-                                    $scope.$parent.arrows+=number;
-                                    modalInstance.dismiss('cancel');
-                                    saveHighscoreModal();
-                                    //window.location.reload();
-                                    //return;
-                                }
-                                $scope.cancel = function(){
-                                    modalInstance.dismiss('cancel');
-                                }
-                            },
-                            //controllerAs: '$ctrl',
-                            //size: size,
-                            resolve: {
-                                items: function () {
-                                    return ["item1", "item2"]
-                                }
-                            }
-                        });
-                    }
+            cloned.remove();
+            if(n == 20){
+                if(n-$rootScope.oldN == 3){
+                    saveHighscoreModal();
                 }else{
-                    $scope.arrows += 3;
-                    $scope.$apply();
-                } 
-            });     
-        } 
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        ariaLabelledBy: 'modal-title',
+                        ariaDescribedBy: 'modal-body',
+                        templateUrl: 'templates/modal.html',
+                        scope:$scope,
+                        controller: function($scope){
+                            $scope.pressNumber = function(number){
+                                //alert(($scope.arrows+number)+" pilar användes");
+                                $scope.$parent.arrows+=number;
+                                modalInstance.dismiss('cancel');
+                                saveHighscoreModal();
+                                //window.location.reload();
+                                //return;
+                            }
+                            $scope.cancel = function(){
+                                modalInstance.dismiss('cancel');
+                            }
+                        },
+                        //controllerAs: '$ctrl',
+                        //size: size,
+                        resolve: {
+                            items: function () {
+                                return ["item1", "item2"]
+                            }
+                        }
+                    });
+                }
+            }else{
+                $scope.arrows += 3;
+                $scope.history.push({n:n,arrows:$scope.arrows});
+                $scope.$apply();
+            } 
+        });     
     })
     
 }

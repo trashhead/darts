@@ -120,6 +120,14 @@ module.exports = function (grunt) {
         files: [ testDir + '/**/*.spec.js' ],
         tasks: [ 'test' ],
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          hostname: '*'
+        }
+      }
     }
 
   });
@@ -169,6 +177,7 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat',
     'copy',
+    "connect",
     'watch'
   ]);
 

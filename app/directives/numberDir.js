@@ -5,30 +5,23 @@ angular.module("app")
         controller:function($scope, $rootScope){
             var vm = this;
             vm.selected = false;
-            $scope.select = function(){
-                var start = new Date();
-                var event = $rootScope.$broadcast('clicked', parseInt($scope.n));
-                console.log("after broadcast: "+(new Date().getTime()-start.getTime()));
-                
-                $rootScope.oldN = $rootScope.n;
-                if(!event.defaultPrevented && $scope.n != 0){
-                    $rootScope.n = $scope.n;
+            $scope.select = function(n){
+                if(n > $rootScope.oldN){
+                    if(n - $rootScope.oldN > 3){
+                        alert("Fler än 3");
+                    }else{
+                        var event = $rootScope.$broadcast('clicked', n);
+                        $rootScope.oldN = n;
+                    }
+                }else if(n == 0){
+                    var event = $rootScope.$broadcast('clicked', n);
+                }else if(n == -1){
+                    $rootScope.$broadcast('undo', n);
                 }
             }
-            $scope.$on("clicked", function(event, n){
-                if(n != 0){
-                    if(!event.defaultPrevented){
-                        if($scope.n <= n){
-                            $scope.selected = true;
-                        }else{
-                            $scope.selected = false;
-                        }
-                    }
-                }
-            })
         },
         scope: {
-            n: '@'
+            n: '='
         },
         replace:true 
     };
