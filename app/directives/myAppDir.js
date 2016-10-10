@@ -28,7 +28,7 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
                 $scope.id = id;
                 $scope.ok = function(number){
                     modalInstance.dismiss('cancel');
-                    if($rootScope.n == 20){
+                    if($rootScope.oldN == 20){
                         window.location.reload();
                     }
                 }
@@ -68,7 +68,6 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
     }
     $scope.showHighscore = showHighscore;
     $scope.changeUsername = changeUsername;
-    $rootScope.n = 0;
     $rootScope.oldN = 0;
     $scope.history = [{n:0, arrows:0}];
     $scope.username = $cookies.get("spelarnamn");
@@ -95,6 +94,7 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
         var position = $("#arrows").position();
         var original = $("#points-"+n);
         var cloned = original.clone();
+        var oldN = $rootScope.oldN;
         if(n == 0){
             cloned.text("3");
         }
@@ -107,7 +107,7 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
             
             cloned.remove();
             if(n == 20){
-                if(n-$rootScope.oldN == 3){
+                if(n-oldN == 3){
                     saveHighscoreModal();
                 }else{
                     var modalInstance = $uibModal.open({
@@ -115,8 +115,8 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
                         ariaLabelledBy: 'modal-title',
                         ariaDescribedBy: 'modal-body',
                         templateUrl: 'templates/modal.html',
-                        scope:$scope,
                         controller: function($scope){
+                            $scope.oldN = oldN;
                             $scope.pressNumber = function(number){
                                 //alert(($scope.arrows+number)+" pilar användes");
                                 $scope.$parent.arrows+=number;
