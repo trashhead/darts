@@ -63,6 +63,16 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
             }
         });
     }
+    var noSleep = new NoSleep();
+
+    function enableNoSleep() {
+        noSleep.enable();
+        document.removeEventListener('touchstart', enableNoSleep, false);
+    }
+
+    // Enable wake lock.
+    // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+    document.addEventListener('touchstart', enableNoSleep, false);
     if($cookies.get("spelarnamn") == null){
         changeUsername();
     }
@@ -81,6 +91,15 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
     $scope.visible = true;
     $scope.toggleVisible = function(){
         $scope.visible = !$scope.visible;
+    }
+    $scope.playing = false
+    $scope.play = function(){
+        if($scope.playing){
+            $("#myvideo")[0].pause();
+        }else{
+            $("#myvideo")[0].play();
+        }
+        $scope.playing = !$scope.playing;
     }
     $scope.$on("undo", function(){
         if($scope.history.length > 1){
