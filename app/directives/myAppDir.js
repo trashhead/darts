@@ -159,7 +159,11 @@ var controller = function($scope, $rootScope, $uibModal, myService, $cookies){
                 }
             }else{
                 $scope.arrows += 3;
-                $scope.history.push({n:n,arrows:$scope.arrows});
+                var historyN = n;
+                if(n == 0){
+                    historyN = oldN;
+                }
+                $scope.history.push({n:historyN,arrows:$scope.arrows});
                 $scope.$apply();
             } 
         });     
