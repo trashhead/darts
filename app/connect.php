@@ -1,7 +1,7 @@
 <?php
 function dbConnect(){
 	// Create connection
-	$con=mysqli_connect("localhost","frankyboy_se","piPD4HXj", "frankyboy_se") or die("error");
+	$con=mysqli_connect("localhost","frankyboy_se","", "frankyboy_se") or die("error");
 
 	// Check connection
 	if (mysqli_connect_errno($con)){
